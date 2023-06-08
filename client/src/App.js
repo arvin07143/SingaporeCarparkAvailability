@@ -9,14 +9,27 @@ function App() {
 
   const [data, setData] = useState(null);
 
-  useEffect(() => {
+
+  const fetchData = () => {
     axios.get("http://host.docker.internal:4000/")
-      .then((response) => {
-        setData(response.data)
-      })
-      .catch(function(error){
-        console.log(error.toJSON())
-      })
+    .then((response) => {
+      setData(response.data)
+    })
+    .catch(function(error){
+      console.log(error.toJSON())
+    })
+  }
+
+  useEffect(() => {
+    fetchData();
+
+    const intervalCall = setInterval(()=>{
+      fetchData()
+    },60000);
+    return()=>{
+      clearInterval(intervalCall)
+    }
+    
   }, []);
 
   if(!data) return null;
