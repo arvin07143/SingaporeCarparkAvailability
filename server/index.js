@@ -8,9 +8,6 @@ app.use(cors())
 
 app.get('/', (req, res) => {
     axios.get("https://api.data.gov.sg/v1/transport/carpark-availability")
-    .catch((error)=>{
-        console.log(error.message)
-    })
     .then(response =>{
         let carpark_data = response.data["items"][0]["carpark_data"]
 
@@ -81,8 +78,13 @@ app.get('/', (req, res) => {
             })
         })
 
+        console.log(out)
+
         res.send(out)
     })
+    .catch((error) => {
+        console.log(error.message)
+    });
 })
 
 app.listen(port, () => {
