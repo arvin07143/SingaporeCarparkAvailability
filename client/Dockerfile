@@ -1,5 +1,5 @@
-FROM node:alpine
+FROM node:20
 WORKDIR /app
 COPY ./ ./
-RUN npm install
+RUN npm ci
 CMD [ "npm", "run","start"]
