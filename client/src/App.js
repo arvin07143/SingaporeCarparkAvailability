@@ -11,7 +11,7 @@ function App() {
 
 
   const fetchData = () => {
-    axios.get("http://host.docker.internal:4000/")
+    axios.get("http://localhost:4000/")
     .then((response) => {
       setData(response.data)
     })
